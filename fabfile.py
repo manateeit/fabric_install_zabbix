@@ -19,7 +19,7 @@ def mysqlInstall():
 def phpInstall():
     run("sudo apt-get udpate")
     run("sudo apt-get install -y php5 libapache2-mod-php5 php5-mcrypt --force-yes")
-    put("./dif.conf", "/etc/apache2/mods-enabled/dir.conf", use-root=True)
+    put("./dif.conf", "/etc/apache2/mods-enabled/dir.conf", use_sudo=True)
     apache2Restart()
 
 @task
