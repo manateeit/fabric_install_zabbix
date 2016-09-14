@@ -23,6 +23,19 @@ def phpInstall():
     apache2Restart()
 
 @task
+def phpInstallExtentions():
+    run("sudo apt-get update")
+    run("sudo apt-get install php-gd")
+    run("sudo apt-get install php-libXML")
+    run("sudo apt-get install php-xmlreader")
+    run("sudo apt-get install php-xmlwriter")
+    run("sudo apt-get install php-session")
+    run("sudo apt-get install php-mbstring")
+    run("sudo apt-get install php-gettext")
+    run("sudo apt-get install php-ldap")
+    run("sudo apt-get install php-mysqli")
+ 
+@task
 def zabbixInstallDebFile():
     run("wget http://repo.zabbix.com/zabbix/3.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.0-1+trusty_all.deb")
     run("dpkg -i zabbix-release_3.0-1+trusty_all.deb")
