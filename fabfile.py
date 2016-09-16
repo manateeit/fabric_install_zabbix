@@ -28,7 +28,7 @@ def phpInstall():
     run("sudo apt-get install -y php5 libapache2-mod-php5 php5-mcrypt --force-yes")
     put("./dir.conf", "/etc/apache2/mods-enabled/dir.conf", use_sudo=True)
     run("sudo apt-get install -y --force-yes  php5-gd  php5-ldap ")
-    apache2Restart()
+    apache2-restart()
  
 @task
 def zabbixInstallDebFile():
@@ -46,18 +46,37 @@ def zabbixInstallClientPackages():
     run("sudo apt-get install -y zabbix-agent --force-yes")
 
 
+@task 
+def zabbixCreateDatabase(PASSWORD):
+    run("sudo cd /usr/share/doc/zabbix-server-mysql && sudo zcat create.sql.gz | sudo mysql -uroot -p"+ PASSWORD" + zabbix")
+
+
 @task
-def apache2Stop():
+def zabbix-start():
+    run("service zabbix-server start")
+
+@task
+def zabbix-stop():
+    run("service zabbix-server stop")
+
+@task
+def zabbix-restart():
+    zabbix-stop()
+    zabbix-start()
+
+
+@task
+def apache2-stop():
     run("sudo service apache2 stop")
 
 @task
-def apache2Start():
+def apache2-start():
     run("sudo service apache2 start")
 
 @task
-def apache2Restart():
-    apache2Stop()
-    apache2Start()
+def apache2-restart():
+    apache2-stop()
+    apache2-start()
 
 @task
 def zabbixINSTALL(PASSWORD):
